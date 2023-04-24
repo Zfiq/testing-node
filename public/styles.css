@@ -1,0 +1,1582 @@
+@media screen and (min-width: 651px) {
+  .calculate-btn {
+    display: none;
+  }
+}
+@media screen and (min-width: 650px) and (max-device-width: 1024px) {
+  .calculate-btn {
+    display: inline;
+  }
+}
+
+:root {
+  --black: #222;
+  --white: #fff;
+  --default: #0751a5;
+  --orange: #ff7417;
+  --yellow: #d1b307;
+  --grey: #a0a3ad;
+  --grey2: #f9fafd;
+  --warn: #e71247;
+}
+
+/* ========= Reset ========= */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: number;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 72.5%;
+}
+
+body {
+  margin: 0;
+  padding-top: 40 px;
+  font-family: "Dosis", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--black);
+  background-color: var(--white);
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+img {
+  width: 15%;
+  height: 10%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.container {
+  max-width: 114rem;
+  margin: 0 auto;
+  padding: 0 1.6rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0 5rem;
+  }
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  line-height: 1rem;
+  background-color: var(--black);
+  z-index: 9;
+}
+
+.nav__center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.nav__logo {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.nav__logo span {
+  color: var(--orange);
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.login {
+  display: inline-block;
+  font-size: 1.7rem;
+  margin-right: 6rem;
+  padding: 1rem 1.1rem;
+  color: var(--black);
+  background-color: var(--yellow);
+}
+
+.login:focus {
+  outline: none;
+}
+
+img {
+  max-width: 50%;
+  display: block;
+}
+
+.cart-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#cart {
+  position: fixed;
+  color: #9b01f5;
+  font-size: 2rem;
+  cursor: pointer;
+  margin: 1em 1em 0 0;
+  z-index: 9;
+}
+
+.cart-quantity {
+  color: white;
+  background-color: red;
+  padding: 0.2em 0.3em;
+  position: fixed;
+  margin: 0.8em 3.5em 0 0;
+  right: 0;
+  border: solid 2px red;
+  border-radius: 15px;
+  font-weight: bolder;
+  z-index: 9;
+}
+
+.items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 1em;
+  padding-top: 50px;
+}
+
+.card {
+  /*   width: 15rem; */
+  margin: 1em;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.card:hover .add-to-cart {
+  transform: translateX(0);
+}
+
+.product-image {
+  margin-bottom: 1.5em;
+  margin-right: 10%;
+}
+
+.add-to-cart {
+  background-color: rgb(0, 26, 255);
+  color: white;
+  position: absolute;
+  width: 20%;
+  top: -5%;
+  padding: 0.5em 1em;
+  left: 80%;
+  /* transform: translateX(300px); */
+  /* transition: .5s ease; */
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 0.8rem;
+}
+
+.product-price {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 10%;
+  margin-bottom: 10%;
+}
+.price-box {
+  width: 50%;
+  margin-top: -10px;
+  margin-left: 20%;
+}
+
+.eur {
+  margin-left: 1.5em;
+}
+.product-name {
+  width: 100%;
+  height: 15%;
+  padding-right: 5%;
+  margin-left: -10%;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+.product_name {
+  color: rgb(255, 255, 255);
+}
+
+.cart-modal-overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  transform: translateX(-200%);
+  transition: 0.5s ease-out;
+}
+
+.cart-modal {
+  height: 100vh;
+  width: 50%;
+  background-color: rgb(50, 50, 50);
+  float: right;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#close-btn {
+  font-size: 1.5rem;
+  float: right;
+  margin: 0.5em 2em 0 0;
+  color: white;
+  cursor: pointer;
+}
+
+.cart-is-empty {
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  display: none;
+}
+.€-incart {
+  margin-top: -20px;
+  margin-right: 50px;
+  color: white;
+}
+
+.total {
+  text-align: center;
+  margin: 2em 0 2em 0;
+  /*   display: none; */
+}
+
+.cart-total {
+  color: white;
+}
+
+.total-price {
+  color: white;
+  font-size: 2rem;
+  display: block;
+}
+
+.purchase-btn {
+  display: none;
+  font-size: 1rem;
+  width: 195%;
+  font-weight: bolder;
+  background-color: green;
+  color: white;
+  padding: 1em 2em;
+  margin-top: 170%;
+  margin-left: 45%;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-box {
+  margin: 0;
+  position: absolute;
+  top: 1%;
+  left: 40%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.product-rows {
+  margin-top: 3em;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-row {
+  display: flex;
+  align-items: center;
+}
+
+.cart-image {
+  width: 10rem;
+  margin: 1em;
+}
+
+.cart-price {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.product-quantity {
+  width: 4rem;
+  font-size: 2rem;
+  margin-left: 3rem;
+}
+.calculate-btn {
+  font-size: 1rem;
+  font-weight: bolder;
+  background-color: rgb(3, 28, 245);
+  color: white;
+  padding: 1em 2em;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 30%;
+}
+.btn-box2 {
+  margin: 0;
+  position: relative;
+  top: 20%;
+  left: 40%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.remove-btn {
+  padding: 1em 2em;
+  background-color: red;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 3rem;
+  font-weight: bolder;
+  font-size: 1rem;
+}
+
+.remove-btn:active {
+  transform: translateY(5px);
+}
+
+/* @media (max-width: 1000px){
+.cart-modal {
+  width: 100vw;
+}  */
+
+.product-row {
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.remove-btn {
+  margin: 0;
+}
+
+.product-quantity {
+  margin: 0.5em 0 0.5em 0;
+}
+
+:root {
+  --switches-bg-color: goldenrod;
+  --switches-label-color: white;
+  --switch-bg-color: white;
+  --switch-text-color: goldenrod;
+}
+
+/* p - decorative, not required */
+
+/* container for all of the switch elements 
+  - adjust "width" to fit the content accordingly 
+*/
+.switches-container {
+  width: 20rem;
+  position: relative;
+  display: flex;
+  padding: 0;
+  position: relative;
+  background: var(--switches-bg-color);
+  line-height: 3rem;
+  border-radius: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* input (radio) for toggling. hidden - use labels for clicking on */
+.switches-container input {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+}
+
+/* labels for the input (radio) boxes - something to click on */
+.switches-container label {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  color: var(--switches-label-color);
+}
+
+/* switch highlighters wrapper (sliding left / right) 
+  - need wrapper to enable the even margins around the highlight box
+*/
+.switch-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  padding: 0.15rem;
+  z-index: 3;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  /* transition: transform 1s; */
+}
+
+/* switch box highlighter */
+.switch {
+  border-radius: 3rem;
+  background: var(--switch-bg-color);
+  height: 100%;
+}
+
+/* switch box labels
+  - default setup
+  - toggle afterwards based on radio:checked status 
+*/
+.switch div {
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  display: block;
+  color: var(--switch-text-color);
+  transition: opacity 0.2s cubic-bezier(0.77, 0, 0.175, 1) 0.125s;
+  will-change: opacity;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* slide the switch box from right to left */
+.switches-container input:nth-of-type(1):checked ~ .switch-wrapper {
+  transform: translateX(0%);
+}
+
+/* slide the switch box from left to right */
+.switches-container input:nth-of-type(3):checked ~ .switch-wrapper {
+  transform: translateX(70%);
+}
+.switches-container input:nth-of-type(2):checked ~ .switch-wrapper {
+  transform: translateX(150%);
+}
+
+/* toggle the switch box labels - first checkbox:checked - show first switch div */
+.switches-container
+  input:nth-of-type(1):checked
+  ~ .switch-wrapper
+  .switch
+  div:nth-of-type(1) {
+  opacity: 1;
+}
+
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.switches-container
+  input:nth-of-type(2):checked
+  ~ .switch-wrapper
+  .switch
+  div:nth-of-type(2) {
+  opacity: 1;
+}
+.switches-container
+  input:nth-of-type(3):checked
+  ~ .switch-wrapper
+  .switch
+  div:nth-of-type(3) {
+  opacity: 1;
+}
+
+/* 
+SWITCH PAY
+*/
+.pay-container {
+  width: 20rem;
+  position: relative;
+  display: flex;
+  padding: 0;
+  position: relative;
+  background: var(--switches-bg-color);
+  line-height: 3rem;
+  border-radius: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* input (radio) for toggling. hidden - use labels for clicking on */
+.pay-container input {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+}
+
+/* labels for the input (radio) boxes - something to click on */
+.pay-container label {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  color: var(--switches-label-color);
+}
+
+/* switch highlighters wrapper (sliding left / right) 
+- need wrapper to enable the even margins around the highlight box
+*/
+.pay-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  padding: 0.15rem;
+  z-index: 3;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  /* transition: transform 1s; */
+}
+
+/* switch box highlighter */
+.pay {
+  border-radius: 3rem;
+  background: var(--switch-bg-color);
+  height: 100%;
+}
+
+/* switch box labels
+- default setup
+- toggle afterwards based on radio:checked status 
+*/
+.pay div {
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  display: block;
+  color: var(--switch-text-color);
+  transition: opacity 0.2s cubic-bezier(0.77, 0, 0.175, 1) 0.125s;
+  will-change: opacity;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* slide the switch box from right to left */
+.pay-container input:nth-of-type(1):checked ~ .pay-wrapper {
+  transform: translateX(0%);
+}
+
+/* slide the switch box from left to right */
+.pay-container input:nth-of-type(3):checked ~ .pay-wrapper {
+  transform: translateX(70%);
+}
+.pay-container input:nth-of-type(2):checked ~ .pay-wrapper {
+  transform: translateX(150%);
+}
+
+/* toggle the switch box labels - first checkbox:checked - show first switch div */
+.pay-container
+  input:nth-of-type(1):checked
+  ~ .pay-wrapper
+  .pay
+  div:nth-of-type(1) {
+  opacity: 1;
+}
+
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.pay-container
+  input:nth-of-type(2):checked
+  ~ .pay-wrapper
+  .pay
+  div:nth-of-type(2) {
+  opacity: 1;
+}
+.pay-container
+  input:nth-of-type(3):checked
+  ~ .pay-wrapper
+  .pay
+  div:nth-of-type(3) {
+  opacity: 1;
+}
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+
+.form-popup {
+  display: none;
+  position: absolute;
+  width: 30%;
+  top: -2%;
+  right: 70%;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 100%;
+  padding: 10px;
+  margin-top: 23%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Full-width input fields */
+.form-container input[type="text"],
+input[type="text"],
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type="text"]:focus,
+.form-container input[type="text"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 3% 3%;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+/* The Pay form - hidden by default */
+
+.form-popup2 {
+  display: none;
+  position: absolute;
+  width: 40%;
+  top: -5%;
+  right: 30%;
+  z-index: 9;
+}
+
+.form-container2 {
+  width: 100%;
+  padding: 10px;
+  margin-top: 23%;
+  background-color: rgb(199, 199, 199);
+  border-radius: 10px;
+}
+
+.form-container2 input[type="text"],
+input[type="number"],
+.form-container2 input[type="number"] {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-container2 input[type="number"]:focus,
+.form-container2 input[type="number"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.form-container2 .btn {
+  background-color: #4400ff;
+  color: white;
+  padding: 3% 3%;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container2 .cancel {
+  background-color: rgb(255, 145, 0);
+}
+
+/* Add some hover effects to buttons */
+.form-container2 .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+}
+.image-column1 {
+  float: left;
+  width: 55.33%;
+  margin-left: 25%;
+}
+.image-column2 {
+  margin-top: -22%;
+  float: right;
+  width: 45.33%;
+}
+.form-container {
+  opacity: 1;
+  animation: fadeIn 1s ease;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.form-container2 {
+  opacity: 1;
+  animation: fadeIn 1s ease;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+main {
+  width: 480px;
+}
+
+form > * {
+  margin: 10px 0;
+}
+
+button {
+  background-color: var(--accent-color);
+}
+
+button {
+  background: var(--accent-color);
+  border-radius: var(--radius);
+  color: white;
+  border: 0;
+  padding: 12px 16px;
+  margin-top: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+}
+button:hover {
+  filter: contrast(115%);
+}
+button:active {
+  transform: translateY(0px) scale(0.98);
+  filter: brightness(0.9);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: none;
+}
+
+input,
+select {
+  display: block;
+  font-size: 1.1em;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+}
+
+a {
+  color: var(--accent-color);
+  font-weight: 900;
+}
+
+small {
+  font-size: 0.6em;
+}
+
+#payment-form {
+  border: #f6f9fc solid 1px;
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 30px 50px -20px rgb(50 50 93 / 25%),
+    0 30px 60px -30px rgb(0 0 0 / 30%);
+}
+
+#messages {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New";
+  display: none; /* hide initially, then show once the first message arrives */
+  background-color: #0a253c;
+  color: #00d924;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: var(--radius);
+  font-size: 0.7em;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.close {
+  color: rgb(0, 0, 0);
+  float: right;
+  font-size: 300%;
+  font-weight: bold;
+  margin-right: -2%;
+  margin-top: -3%;
+
+  transition: transform 0.25s, opacity 0.25s;
+  opacity: 0.9;
+  cursor: pointer;
+
+  font-family: serif;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.modal-body {
+  padding: 2px 16px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.del-popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 40%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.del-popup .popuptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  font-size: 0.65em;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 9;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.del-popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.del-popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.service-popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 50%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.service-popup .popuptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  font-size: 0.65em;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 9;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -90px;
+}
+
+/* Popup arrow */
+.service-popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.service-popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.spacing-table {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  border-collapse: separate;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0 5px; /* this is the ultimate fix */
+}
+.spacing-table th {
+  text-align: left;
+  padding: 2% 5%;
+}
+.spacing-table td {
+  border-width: 3px 0;
+  width: 50%;
+  border-color: rgb(7, 190, 236);
+  border-style: solid;
+  background-color: rgb(0, 195, 255);
+  color: white;
+  font-size: 0.9em;
+  padding: 2% 5%;
+}
+.spacing-table td:first-child {
+  border-left-width: 3px;
+  border-radius: 5px 0 0 5px;
+}
+.spacing-table td:last-child {
+  border-right-width: 3px;
+  border-radius: 0 5px 5px 0;
+}
+.spacing-table thead {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.spacing-table tbody {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0 10px;
+}
+
+#meal-btn1,
+#drinks-btn2,
+#drinks-btn3,
+#drinks-btn4,
+#drinks-btn5 {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 25%;
+  padding: 0.5em 1em;
+  /* transform: translateX(300px); */
+  /* transition: .5s ease; */
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 1rem;
+}
+.meal-dialog {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.meal-dialog-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.meal-dialog-close {
+  color: rgb(70, 70, 70);
+  float: right;
+  font-size: 300%;
+  font-weight: bold;
+  margin-right: -2%;
+  margin-top: -3%;
+
+  transition: transform 0.25s, opacity 0.25s;
+  opacity: 0.9;
+  cursor: pointer;
+  line-height: 1;
+  font-family: serif;
+}
+
+.meal-dialog-close:hover,
+.meal-dialog-closefocus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+
+.meal-dialog-header {
+  padding: 2px 16px;
+  background-color: #ffffff;
+  color: white;
+}
+.meal-dialog-body {
+  padding: 2px 16px;
+}
+/* The container Radio */
+
+.container-radio {
+  display: block;
+
+  position: relative;
+
+  padding-left: 35px;
+
+  margin-bottom: 12px;
+
+  cursor: pointer;
+
+  font-size: 22px;
+
+  -webkit-user-select: none;
+
+  -moz-user-select: none;
+
+  -ms-user-select: none;
+
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+
+.container-radio input {
+  position: absolute;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+
+.checkmark {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  height: 25px;
+
+  width: 25px;
+
+  background-color: #eee;
+
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+
+.container-radio:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+
+.container-radio input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+
+  position: absolute;
+
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+
+.container-radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+
+.container-radio .checkmark:after {
+  top: 9px;
+
+  left: 9px;
+
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: white;
+}
+
+.drink-header {
+  position: absolute;
+
+  width: 60%;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 1em;
+
+  font-weight: bold;
+}
+
+#meal-option1 {
+  float: left;
+  margin-left: 4%;
+}
+#meal-option2 {
+  float: left;
+  margin-left: 120%;
+  margin-top: -213%;
+  width: 120%;
+}
+.change-drinks-btn {
+  background-color: blue;
+  margin-left: 40%;
+  margin-bottom: 5%;
+}
+
+.item-description {
+  font-size: 0.8em;
+  font-weight: 500;
+  height: 2%;
+}
+.drinks-text {
+  margin-left: 2%;
+  margin-top: -12%;
+  font-size: 0.7em;
+}
+
+.card2 {
+  padding: 10px;
+  border-radius: 4px;
+  width: 50%;
+  height: 13%;
+  margin-left: 49%;
+  background-color: white;
+  box-shadow: 0 4px 4px -2px hsla(15, 100%, 40%, 0.6);
+  color: hsla(0, 0%, 0%, 0.8);
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: 0.2s ease-in-out;
+}
+.deals-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-left: 49%;
+  color: rgb(255, 255, 255);
+}
+.card2:hover {
+  transform: translateY(2px);
+  background-color: #d8cfc5fb;
+}
+
+.grid2 {
+  background-color: #430cf8;
+}
+.add-meal-charge {
+  margin-left: 20%;
+  background-color: #00d924;
+}
+.radio-box {
+  display: flex;
+  width: 120px;
+  margin-bottom: 10px;
+  margin-top: 2%;
+  margin-right: 40%;
+  content: "switch to mobile";
+  font-weight: bold;
+  font-size: 0.8em;
+  color: #627ae0;
+  background: #e5eaff00;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.meal-text1,
+.meal-text2,
+.meal-text3,
+.meal-text4,
+.meal-text5,
+.meal-text6 {
+  padding-bottom: -2%;
+  margin-left: 13px;
+  font-size: 0.7em;
+}
+.customize-btn {
+  display: none;
+  background-color: rgb(0, 26, 255);
+  color: white;
+  position: absolute;
+  width: 25%;
+  top: 29%;
+  padding: 0.5em 1em;
+  left: 75%;
+  /* transform: translateX(300px); */
+  /* transition: .5s ease; */
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: 0.7rem;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  opacity: 3;
+}
+.window1-popup {
+  display: none;
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 50%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.window1-popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.window1-close {
+  color: rgb(241, 37, 37);
+  float: right;
+  font-size: 200%;
+  font-weight: bold;
+
+  margin-top: -8%;
+  transition: transform 0.25s, opacity 0.25s;
+  opacity: 0.9;
+  cursor: pointer;
+  font-family: serif;
+}
+.window1-popup .window1-close:hover {
+  color: rgb(185, 63, 63);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+.wrapper-1 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.wrapper-2 {
+  padding: 30px;
+  text-align: center;
+}
+.thankYou-text {
+  font-family: "Kaushan Script", cursive;
+  font-size: 4em;
+  letter-spacing: 3px;
+  color: #5892ff;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.wrapper-2 p {
+  margin: 0;
+  font-size: 1.3em;
+  color: #aaa;
+  font-family: "Source Sans Pro", sans-serif;
+  letter-spacing: 1px;
+}
+.go-home {
+  color: #fff;
+  background: #5892ff;
+  border: none;
+  padding: 10px 50px;
+  margin: 30px 200px;
+  border-radius: 30px;
+  text-transform: capitalize;
+  box-shadow: 0 10px 16px 1px rgba(174, 199, 251, 1);
+}
+.footer-like {
+  margin-top: auto;
+  background: #d7e6fe;
+  padding: 6px;
+  text-align: center;
+}
+.footer-like p {
+  margin: 0;
+  padding: 4px;
+  color: #5892ff;
+  font-family: "Source Sans Pro", sans-serif;
+  letter-spacing: 1px;
+}
+.footer-like p a {
+  text-decoration: none;
+  color: #5892ff;
+  font-weight: 600;
+}
+
+@media (min-width: 360px) {
+  .go-home {
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 600px) {
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .wrapper-1 {
+    height: initial;
+    max-width: 620px;
+    margin: 0 auto;
+    margin-top: 50px;
+    box-shadow: 4px 8px 40px 8px rgba(88, 146, 255, 0.2);
+  }
+}

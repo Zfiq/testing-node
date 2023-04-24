@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <!-- Latest compiled and minified CSS -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <title>Pay online</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script>
+    var cr = "";
+
+    setTimeout(function () {
+      document.getElementById("myForm").reset();
+    }, 5);
+
+    function validateForm() {
+      let nam = document.forms["myForm"]["name"].value;
+      cr = document.forms["myForm"]["crd_no"].value;
+      let exm = document.forms["myForm"]["expiry_month"].value;
+      let exy = document.forms["myForm"]["expiry_year"].value;
+      let cv = document.forms["myForm"]["cvc"].value;
+      let total = document.forms["myForm"]["total_cost"].value;
+      let serviceCharge = document.forms["myForm"]["t_fee"].value;
+
+      // IF NOT COMPLETE
+
+      if (cr.length < 16) {
+        alert("Invalid card number Please provide valid card number")
+        return false;
+      }
+      if (exm.length < 2) {
+        alert("Invalide month")
+        return false;
+      }
+      if (exy.length < 4) {
+        alert("Invalide year")
+        return false;
+      }
+      if (cv.length < 3) {
+        alert("Invalide CVC please provide 3 digits CVC")
+        return false;
+      }
+
+
+
+      // IF EMPTY
+
+      if (nam == "") {
+        alert(" please Name on card must be filled out");
+        return false;
+      } if (cr == "") {
+        alert("Card Number must be filled out");
+        return false;
+
+
+      } if (ex == "") {
+        alert("expiry must be filled out");
+        return false;
+      } if (cv == "") {
+        alert("CVC must be filled out");
+        return false;
+      }
+
+    }
+
+
+    // JUMP TO NEXT
+    function jump(field, automove) {
+      if (field.value.length >= field.maxLength) {
+        document.getElementById(automove).focus();
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="text-align: center;">Pay by card</h1>
+    <form action="/" method="POST" id="myForm" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="NameOnCard">Name On Card</label>
+        <input type="text" class="form-control" id="name" placeholder="Name on Card" name="name">
+      </div>
+      <div class="form-group">
+        <label for="Card_Number">Card Number</label>
+        <input type="number" class="form-control" id="crd_no" placeholder="Name on Card" name="crd_no"
+          onkeyup="jump(this,'expiry_month')"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); "
+          maxlength="16">
+      </div>
+      <div class="form-group">
+        <label for="Expiry">Expiry Month</label>
+        <input type="number" class="form-control" id="expiry_month" name="expiry_month" placeholder="Month"
+          onkeyup="jump(this,'expiry_year')"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="2">
+      </div>
+      <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" class="form-control" id="expiry_year" name="expiry_year" placeholder="Year"
+          onkeyup="jump(this,'cvc')"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="4">
+      </div>
+      <div class="form-group">
+        <label for="CVC">CVC</label>
+        <input type="number" class="form-control" id="cvc" name="cvc" placeholder="CVC"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+          maxlength="3">
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-left: 20%;" onclick="">Proceed</button>
+    </form>
+    <p> <i class="fab fa-cc-visa" style="color:blue; font-size:50px; margin-left: 50%;"></i>
+</body>
+
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-database.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-analytics.js"></script>
+
+
+
+  <!-- StyleSheet -->
+  <link rel="stylesheet" href="styles.css">
+  <title>Shopping Cart Project</title>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__center container">
+      <div class="nav__logo">
+        <h1>Shopping<span> Cart</span></h1>
+
+      </div>
+
+      <ul class="nav__list">
+        <a href="#" class="login">Login</a>
+        <div class="cart__icon">
+
+        </div>
+      </ul>
+      <div class="btn-box"><button class="purchase-btn">PURCHASE</button></div>
+    </div>
+  </nav>
+
+
+  <!--  cart modal  -->
+  <div class="cart-modal-overlay">
+    <div class="cart-modal">
+      <i id="close-btn" class="fas fa-times"></i>
+      <h1 class="cart-is-empty">Cart is empty</h1>
+
+      <div class="product-rows">
+      </div>
+      <div class="total">
+        <div class="btn-box2"> <button class="calculate-btn">Calculate</button></div>
+
+        <div class="del-popup">
+          <span class="popuptext" id="del-charge-Popup">Delivey Charge 3</span>
+        </div>
+        <div class="service-popup">
+          <span class="popuptext" id="service-charge-Popup">Service Charge .50</span>
+        </div>
+        <h1 class="cart-total">TOTAL</h1>
+        <div style="color: aliceblue;">Eur</div><span class="total-price">0</span>
+
+
+        <!--                    SWITCT DEL COL           -->
+
+        <div class="switches-container">
+          <input type="radio" id="switchDelivery" name="switchPlan" value="Delivery"
+            onclick="openForm(),popupDel_charge()" />
+          <input type="radio" id="switchCollection" name="switchPlan" value="Collection"
+            onclick="closeForm(),close_del_popup()" />
+          <input type="radio" id="selection_none" name="switchPlan" value="selection_none" checked="checked"
+            onclick="closeForm()" />
+          <label for="switchDelivery">Delivery</label>
+          <label for="selection_none">.</label>
+          <label for="switchCollection">Collection</label>
+
+
+
+          <div class="switch-wrapper">
+            <div class="switch">
+              <div>Delivery</div>
+              <div>Collection</div>
+              <div style="font-size: .8em; color: rgb(153, 0, 255);">please select</div>
+            </div>
+          </div>
+        </div>
+        <!-- Form  under radio -->
+        <div class="display_form"></div>
+        <br>
+        <!--                    SWITCT PAY           -->
+
+
+        <div class="pay-container">
+          <input type="radio" id="switchPayonline" name="switchPlan2" value="switchPayonline"
+            onclick="service_popup();" />
+          <input type="radio" id="switchCash" name="switchPlan2" value="switchCash" onclick="close_service_popup()" />
+          <input type="radio" id="pay_none" name="switchPlan2" value="pay_none" checked="checked" />
+          <label for="switchPayonline">Pay Online</label>
+          <label for="selection_none2">.</label>
+          <label for="switchCash">Cash</label>
+
+          <div class="pay-wrapper">
+            <div class="pay">
+              <div>Pay Online</div>
+              <div>Cash</div>
+              <div style="font-size: .8em; color: rgb(153, 0, 255);">please select</div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!--   end of cart modal -->
+  <div class="cart-btn">
+    <i id="cart" class="fas fa-shopping-cart"></i>
+    <span class="cart-quantity">0</span>
+  </div>
+
+  <!--  products  INCLUDED 2 CARDS-->
+
+  <div class="items-container">
+
+    <div class="grid2">
+      <span class="deals-title">Special Deals</span>
+      <div class="card2 card">
+
+        <div class="product-name">Regular Burger</div>
+        <img style="display: none;" class="product-image" src="./images/1:4Pounder.png" alt="">
+        <div class="radio-box">
+          <input type="radio" name="radio1" onclick="burger_radio1()" value="Regular">Regular<br>
+          <input type="radio" name="radio1" onclick="burger_radio1()" value="Meal">Meal<br>
+        </div>
+        <div class="price-box"> <span class="eur">€ </span> <span class="product-price" id="product-price1">5</span>
+          <div class="meal-text1" id="text1"></div>
+        </div>
+        <div class="item-description">Served with green salad, tomato sauce & mayonnaise </div>
+        <button class="add-to-cart">Add to cart</button><br>
+      </div>
+
+
+
+      <div class="card2 card">
+        <div class="product-name">Cheese Burger</div>
+        <img style="display: none;" class="product-image" src="./images/1:4Pounder.png" alt="">
+        <div class="radio-box">
+          <input type="radio" name="radio2" onclick="burger_radio2()" value="Regular">Regular<br>
+          <input type="radio" name="radio2" onclick="burger_radio2()" value="Meal">Meal<br>
+        </div>
+        <div class="price-box"> <span class="eur">€ </span> <span class="product-price" id="product-price2">2</span>
+          <div class="meal-text2" id="text2"></div>
+        </div>
+        <div class="item-description">Served with green salad, tomato sauce & mayonnaise </div>
+        <button class="add-to-cart">Add to cart</button><br>
+      </div>
+
+
+      <div class="card2 card">
+        <div class="product-name"> Double Cheese Burger</div>
+        <img style="display: none;" class="product-image" src="./images/1:4Pounder.png" alt="">
+        <div class="radio-box">
+          <input type="radio" name="radio3" onclick="burger_radio3()" value="Regular">Regular<br>
+          <input type="radio" name="radio3" onclick="burger_radio3()" value="Meal">Meal<br>
+        </div>
+        <div class="price-box"> <span class="eur">€ </span> <span class="product-price" id="product-price3">4</span>
+          <div class="meal-text3" id="text3"></div>
+        </div>
+        <div class="item-description">Served with green salad, tomato sauce & mayonnaise </div>
+        <button class="add-to-cart">Add to cart</button><br>
+      </div>
+
+      <div class="card2 card">
+        <div class="product-name">1/4 Pounder Double Cheese</div>
+        <img style="display: none;" class="product-image" src="./images/1:4Pounder.png" alt="">
+        <div class="radio-box">
+          <input type="radio" name="radio4" onclick="burger_radio4()" value="Regular">Regular<br>
+          <input type="radio" name="radio4" onclick="burger_radio4()" value="Meal">Meal<br>
+        </div>
+        <div class="price-box"> <span class="eur">€ </span> <span class="product-price" id="product-price4">4</span>
+          <div class="meal-text4" id="text4"></div>
+        </div>
+        <div class="item-description">Served with green salad, tomato sauce & mayonnaise </div>
+        <button class="add-to-cart">Add to cart</button><br>
+      </div>
+
+
+      <div class="card2 card">
+        <div class="product-name">1/2 Pounder Double Cheese</div>
+        <img style="display: none;" class="product-image" src="./images/1:4Pounder.png" alt="">
+        <div class="radio-box">
+          <input type="radio" name="radio5" onclick="burger_radio5()" value="Regular">Regular<br>
+          <input type="radio" name="radio5" onclick="burger_radio5()" value="Meal">Meal<br>
+        </div>
+        <div class="price-box"> <span class="eur">€ </span> <span class="product-price" id="product-price5">5</span>
+          <div class="meal-text5" id="text5"></div>
+        </div>
+        <div class="item-description">Served with green salad, tomato sauce & mayonnaise </div>
+        <button class="add-to-cart">Add to cart</button><br>
+      </div>
+
+
+
+      <!-- Products -->
+
+
+
+      <div class="card2 card">
+
+        <div class="product-name">Margherita Pizza</div>
+        <div class="radio-box">
+          <input type="radio" name="radio6" onclick="burger_radio6()" value="10">10<br>
+          <input type="radio" name="radio6" onclick="burger_radio6()" value="12">12<br>
+          <input type="radio" name="radio6" onclick="burger_radio6()" value="16">16 <br>
+        </div>
+        <img style="display: none;" class="product-image" src="./images/Margherita-Pizza.png" alt="">
+        <div class="price-box"><span class="eur">€ </span> <span class="product-price" id="product-price6">5</span>
+          <div class="meal-text6" id="text6"></div>
+        </div>
+        <div class="item-description">Regular base | Mozzarella cheese | Tomato sauce </div>
+        <button class="add-to-cart">Add to cart</button><br>
+        <button class="customize-btn">Customize pizza</button>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  <!--End of Products -->
+
+  <!----------------------- ADDRESS FORM -->
+
+
+  <div class="form-popup" id="address_form">
+    <form action="" class="form-container">
+      <h3 style="color: rgb(0, 60, 255); text-align: center;">Add Delivery address</h3>
+      <p style="color: rgb(240, 104, 8);background-color: rgb(163, 203, 240);">Delivey charge 3.50 will be added at
+        checkout</p>
+
+      <label for="address">Address</label>
+      <input type="text" placeholder="Line 1" id="address" maxlength="40" required>
+
+      <label for="address2"></label>
+      <input type="text" placeholder="Line 2" id="address2" maxlength="40" required>
+
+      <label for="Eircode">Eircode</label>
+      <input type="text" placeholder="Eircode" id="eircode">
+
+
+      <label for="Comments">Comments</label>
+      <textarea type="text" cols="20" placeholder="Comments" id="comments"></textarea>
+
+      <label for="Phone">Phone</label>
+      <input type="number" placeholder="Contact" id="phone" required>
+      <br></br>
+      <h3 style="font-size: .80em;">Please save your address before purchase</h3>
+      <button type="button" class="btn" onclick="Address()">Save</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+  <!----------------------- PAY FORM   ----- -->
+
+  <!-- The Modal -->
+  <div class="form-popup2" id="address_form2">
+    <form action="/" method="POST" class="form-container2" id="myForm">
+      <h2 style="color: rgb(0, 60, 255); text-align: center;">Pay by Card</h2>
+      <p style="text-align: center;display: none;">Food and Drink </p>
+      <input type="text" id="subtotal" name="subtotal" value="" readonly
+        style="display: none; text-align: center; background-color: rgb(65, 166, 255); outline: none;">
+
+      <p class="delivery-lable" style="text-align: center;display: none;">Delivery Charge </p>
+      <input type="text" id="delivery-charge" name="delivery-charge" value="" readonly
+        style="text-align: center; background-color: rgb(65, 166, 255); outline: none;">
+      <p style="text-align: center;background-color: rgb(65, 166, 255);">Transaction fee 0</p>
+      <input type="text" id="t_fee" name="t_fee" value="" readonly
+        style="display: none; text-align: center; background-color: rgb(65, 166, 255); outline: none;">
+      <p style="text-align: center;">Total Cost</p>
+      <input type="text" id="total_cost" name="total_cost" value="" readonly
+        style="text-align: center; background-color: rgb(65, 166, 255); outline: none;">
+
+
+
+      <label for="frmNameCC">Name on Card</label>
+      <input type="text" class="form-control" id="name" placeholder="Name on Card" name="name">
+
+      <label for="frmCCNum">Card Number</label>
+      <input type="number" class="form-control" id="crd_no" placeholder="Card Number" name="crd_no"
+        onkeyup="jump(this,'expiry_month')"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); "
+        maxlength="16">
+
+      <label for="frmCCCVC">CVC</label>
+      <input type="number" class="form-control" id="cvc" name="cvc" placeholder="CVC"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="3">
+
+      <label for="frmCCExp">Expiry Month</label>
+      <input type="number" class="form-control" id="expiry_month" name="expiry_month" placeholder="Month"
+        onkeyup="jump(this,'expiry_year')"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="2">
+
+      <label for="frmCCExp">Year</label>
+      <input type="number" class="form-control" id="expiry_year" name="expiry_year" placeholder="Year"
+        onkeyup="jump(this,'cvc')"
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        maxlength="4">
+
+      <div class="image-row">
+        <div class="image-column1">
+          <img src="images/8389-mastercard_102495.png">
+        </div>
+        <div class="image-column2">
+          <img src="images/visa_payment_method_card_icon_142729.png">
+        </div>
+      </div>
+
+      <br></br>
+      <button type="submit" class="btn btn-primary" style="margin-left: 1%;">Proceed</button>
+      <button type="button" class="btn cancel" onclick="close_payform()">Close</button>
+    </form>
+  </div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2 id="dialog-header" style="text-align: center;">...</h2>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="spacing-table">
+
+          <tr>
+            <td>Delivery Charge</td>
+            <td id="dialog-delivery"></td>
+          </tr>
+          <tr>
+            <td>Service Charge</td>
+            <td id="dialog-service"></td>
+          </tr>
+          <tr>
+            <th>Total</th>
+            <th id="dialog-subtotal"></th>
+          </tr>
+
+        </table>
+
+        <p id="total"></p>
+      </div>
+      <div class="modal-footer">
+        <h3 id="dialog-footer">Modal Footer</h3>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="overlay"></div>
+
+
+  <div class="window1-popup">
+    <div>
+      <h2>Customize Your Pizza</h2>
+    </div>
+    <div class="window1-close">&times;</div>
+    <div class="window1-content">
+      Thank to pop me out of that button, but now i'm done so you can close this window.
+
+      <label for="base1">Choose Base:</label>
+
+      <select id="pizza-opt1" onchange="getValue1(this)">
+        <option value="deep">Deep</option>
+        <option value="regular base">Regular Base</option>
+        <option value="thin">Thin</option>
+      </select>
+      <select id="sauce-opt1" onchange="getValue2(this)">
+        <option value="bbq sauce">BBQ Sauce</option>
+        <option value="tomato sauce">Tomato Sauce</option>
+        <option value="no sauce">No Sauce</option>
+      </select>
+
+      <button name="order" id="order" style="background-color: brown;">Done</button>
+
+    </div>
+  </div>
+  <script>
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+      modal.style.display = "none";
+      var confirm = window.confirm("PLEASE NOTE \n" + "By canceling this window current session will be terminated\n" + "Are you sure you wamt to exit ?");
+
+      if (confirm) {
+        location.reload(true);
+      }
+      else {
+        modal.style.display = "block";
+      }
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        // modal.style.display = "none";
+      }
+    }
+  </script>
+  <script src="app.js"></script>
+
+</body>
+<script>
+  var cr = "";
+
+  setTimeout(function () {
+    document.getElementById("myForm").reset();
+  }, 5);
+
+  function validateForm() {
+    let nam = document.forms["myForm"]["name"].value;
+    cr = document.forms["myForm"]["crd_no"].value;
+    let exm = document.forms["myForm"]["expiry_month"].value;
+    let exy = document.forms["myForm"]["expiry_year"].value;
+    let cv = document.forms["myForm"]["cvc"].value;
+    let total = document.forms["myForm"]["total"].value;
+
+    // IF NOT COMPLETE
+
+    if (cr.length < 16) {
+      alert("Invalid card number Please provide valid card number")
+      return false;
+    }
+    if (exm.length < 2) {
+      alert("Invalide month")
+      return false;
+    }
+    if (exy.length < 4) {
+      alert("Invalide year")
+      return false;
+    }
+    if (cv.length < 3) {
+      alert("Invalide CVC please provide 3 digits CVC")
+      return false;
+    }
+
+    // IF EMPTY
+
+    if (nam == "") {
+      alert(" please Name on card must be filled out");
+      return false;
+    } if (cr == "") {
+      alert("Card Number must be filled out");
+      return false;
+
+
+    } if (ex == "") {
+      alert("expiry must be filled out");
+      return false;
+    } if (cv == "") {
+      alert("CVC must be filled out");
+      return false;
+    }
+
+  }
+
+
+  // JUMP TO NEXT
+  function jump(field, automove) {
+    if (field.value.length >= field.maxLength) {
+      document.getElementById(automove).focus();
+    }
+  }
+
+  // When the user clicks on div, open the popup
+  function popupDel_charge() {
+    var popup = document.getElementById("del-charge-Popup");
+    document.getElementById("del-charge-Popup").style.display = "block";
+    popup.classList.toggle("show");
+  }
+  function close_del_popup() {
+    document.getElementById("del-charge-Popup").style.display = "none";
+
+  }
+  function service_popup() {
+    var popup = document.getElementById("service-charge-Popup");
+    document.getElementById("service-charge-Popup").style.display = "block";
+    popup.classList.toggle("show");
+  }
+  function close_service_popup() {
+    var popup = document.getElementById("service-charge-Popup");
+    document.getElementById("service-charge-Popup").style.display = "none";
+    popup.classList.toggle("show");
+  }
+
+
+
+</script>
+
+</html>
